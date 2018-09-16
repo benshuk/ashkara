@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>אשכרה?</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Heebo:400,700&subset=hebrew');
+            body {
+                height: 100%;
+                padding-top: 200px;
+                user-select: none;
+            }
+
+            h1 {
+                font-size: 8em;
+                color: white;
+                font-family: 'Heebo', sans-serif;
+                font-weight: 800;
+                text-align: center;
+                margin-top: 0;
+            }
+
+            h2 {
+                font-size: 3em;
+                color: white;
+                font-family: 'Heebo', sans-serif;
+                font-weight: 400;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+
+            span {
+                border-right: .05em solid;
+                animation: caret 1s steps(1) infinite;
+            }
+
+            @keyframes caret {
+                50% {
+                    border-color: transparent;
+                }
+            }
+        </style>
+    </head>
+    <body dir="rtl">
+        <h2>אשכרה?</h2>
+        <h1 id="title"></h1>
+
+        <script>
+            function shuffle(a) {
+                for (let i = a.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [a[i], a[j]] = [a[j], a[i]];
+                }
+                return a;
+            }
+
+            let choose = arr => arr[Math.floor(Math.random() * arr.length)];
+
+            document.addEventListener('DOMContentLoaded',function(event){
+                // array with texts to type in typewriter
+                var dataText = shuffle(["בדוק", "קללל", "תכלס", "חד משמעית", "ברור", "וואלה"]);
+                let titles = ["בדוק", "קללל", "תכלס", "חד משמעית", "ברור", "וואלה"];
+                let title = choose(titles);
+                let backgrounds = ["#FF5A5A", "#ffb25a", "#19c78d","#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"]
+                let bg = choose(backgrounds);
+
+                document.body.style.backgroundColor = bg;
+                
+                // type one text in the typwriter
+                // keeps calling itself until the text is finished
+                function typeWriter(text, i, fnCallback) {
+                    // chekc if text isn't finished yet
+                    if (i < (text.length)) {
+                        // add next character to h1
+                        document.getElementById("title").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
+
+                        // wait for a while and call this function again for next character
+                        setTimeout(function() {
+                                typeWriter(text, i + 1, fnCallback)
+                        }, 100);
+                    }
+                    // text finished, call callback if there is a callback function
+                    else if (typeof fnCallback == 'function') {
+                        // call callback after timeout
+                        setTimeout(fnCallback, 1000);
+                    }
+                }
+                typeWriter(title, 0, () => {});
+            });
+        </script>
+    </body>
+</html>
