@@ -44,19 +44,10 @@
         <h1 id="title"></h1>
 
         <script>
-            function shuffle(a) {
-                for (let i = a.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [a[i], a[j]] = [a[j], a[i]];
-                }
-                return a;
-            }
-
             let choose = arr => arr[Math.floor(Math.random() * arr.length)];
 
             document.addEventListener('DOMContentLoaded',function(event){
                 // array with texts to type in typewriter
-                var dataText = shuffle(["בדוק", "קללל", "תכלס", "חד משמעית", "ברור", "וואלה"]);
                 let titles = ["בדוק", "קללל", "תכלס", "חד משמעית", "ברור", "וואלה"];
                 let title = choose(titles);
                 let backgrounds = ["#FF5A5A", "#ffb25a", "#19c78d","#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"]
