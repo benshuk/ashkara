@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo:400,700&subset=hebrew');
+body {
+    height: 100%;
+    padding-top: 200px;
+    user-select: none;
+    transition: background .5s;
+    font-family: 'Heebo', sans-serif;
+    color: white;
+    text-align: center;
+}
+h1 {
+    font-size: 8em;
+    color: white;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 800;
+    margin-top: 0;
+}
+h2 {
+    font-size: 3em;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+span {
+    border-right: .05em solid;
+    animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+    50% {
+        border-color: transparent;
+    }
+}

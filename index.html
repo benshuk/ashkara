@@ -1,104 +1,12 @@
 <html>
     <head>
         <title>אשכרה?</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css?family=Heebo:400,700&subset=hebrew');
-            body {
-                height: 100%;
-                padding-top: 200px;
-                user-select: none;
-                transition: background .5s;
-            }
-            h1 {
-                font-size: 8em;
-                color: white;
-                font-family: 'Heebo', sans-serif;
-                font-weight: 800;
-                text-align: center;
-                margin-top: 0;
-            }
-            h2 {
-                font-size: 3em;
-                color: white;
-                font-family: 'Heebo', sans-serif;
-                font-weight: 400;
-                text-align: center;
-                margin-bottom: 5px;
-            }
-            span {
-                border-right: .05em solid;
-                animation: caret 1s steps(1) infinite;
-            }
-            @keyframes caret {
-                50% {
-                    border-color: transparent;
-                }
-            }
-        </style>
+        <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body dir="rtl">
         <h2>אשכרה?</h2>
         <h1 id="title"></h1>
 
-        <script>
-            let index = 0;
-            let speed = 150;
-            let choose = arr => arr[Math.floor(Math.random() * arr.length)];
-            let titles = ["בדוק", "קללל", "תכלס", "חד משמעית", "ברור", "וואלה"];
-            let backgrounds = ["#FF5A5A", "#ffb25a", "#19c78d","#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"];
-            let ariaHiddenElement = '<span aria-hidden="true"></span>';
-
-            // Init background
-            let bg = choose(backgrounds);
-            document.body.style.backgroundColor = bg;
-
-            // Init title
-            let title = choose(titles);
-            setTimeout(type,speed);
-
-            // Type the title
-            function type() {
-                if(index < title.length) {
-                    document.getElementById("title").innerHTML = title.substring(0, index + 1) + ariaHiddenElement;
-                    index++;
-                    setTimeout(type,speed);
-                } else {
-                    setTimeout(erase,speed);
-                }
-            }
-
-            // Erase the title
-            function erase() {
-                if(index >= 0) {
-                    var temp = title.substring(0,index);
-                    document.getElementById("title").innerHTML = title.substring(0, index) + ariaHiddenElement;
-                    index--;
-                    setTimeout(erase,speed);
-                } else {
-                    updatePage();
-                    setTimeout(type,speed);
-                }
-            }
-
-            // Update the title and the background of the page, without repeating
-            function updatePage() {
-                // Set new title from the list of titles
-                var index = titles.indexOf(title);
-                if (index !== -1) {
-                    var subTitles = titles.slice();
-                    subTitles.splice(index, 1);
-                    title = choose(subTitles);
-                }
-
-                // Set new background from the list of backgrounds
-                var index = backgrounds.indexOf(bg);
-                if (index !== -1) {
-                    var subBg = backgrounds.slice();
-                    subBg.splice(index, 1);
-                    bg = choose(subBg);
-                    document.body.style.backgroundColor = bg;
-                }
-            }
-        </script>
+        <script src="index.js"></script>
     </body>
 </html>
