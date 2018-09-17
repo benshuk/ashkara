@@ -7,8 +7,8 @@
                 height: 100%;
                 padding-top: 200px;
                 user-select: none;
+                transition: background .5s;
             }
-
             h1 {
                 font-size: 8em;
                 color: white;
@@ -17,7 +17,6 @@
                 text-align: center;
                 margin-top: 0;
             }
-
             h2 {
                 font-size: 3em;
                 color: white;
@@ -26,12 +25,10 @@
                 text-align: center;
                 margin-bottom: 5px;
             }
-
             span {
                 border-right: .05em solid;
                 animation: caret 1s steps(1) infinite;
             }
-
             @keyframes caret {
                 50% {
                     border-color: transparent;
@@ -44,38 +41,64 @@
         <h1 id="title"></h1>
 
         <script>
+            let index = 0;
+            let speed = 150;
             let choose = arr => arr[Math.floor(Math.random() * arr.length)];
+            let titles = ["בדוק", "קללל", "תכלס", "חד משמעית", "ברור", "וואלה"];
+            let backgrounds = ["#FF5A5A", "#ffb25a", "#19c78d","#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"];
+            let ariaHiddenElement = '<span aria-hidden="true"></span>';
 
-            document.addEventListener('DOMContentLoaded',function(event){
-                // array with texts to type in typewriter
-                let titles = ["בדוק", "קללל", "תכלס", "חד משמעית", "ברור", "וואלה"];
-                let title = choose(titles);
-                let backgrounds = ["#FF5A5A", "#ffb25a", "#19c78d","#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"]
-                let bg = choose(backgrounds);
+            // Init background
+            let bg = choose(backgrounds);
+            document.body.style.backgroundColor = bg;
 
-                document.body.style.backgroundColor = bg;
-                
-                // type one text in the typwriter
-                // keeps calling itself until the text is finished
-                function typeWriter(text, i, fnCallback) {
-                    // chekc if text isn't finished yet
-                    if (i < (text.length)) {
-                        // add next character to h1
-                        document.getElementById("title").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
+            // Init title
+            let title = choose(titles);
+            setTimeout(type,speed);
 
-                        // wait for a while and call this function again for next character
-                        setTimeout(function() {
-                                typeWriter(text, i + 1, fnCallback)
-                        }, 100);
-                    }
-                    // text finished, call callback if there is a callback function
-                    else if (typeof fnCallback == 'function') {
-                        // call callback after timeout
-                        setTimeout(fnCallback, 1000);
-                    }
+            // Type the title
+            function type() {
+                if(index < title.length) {
+                    document.getElementById("title").innerHTML = title.substring(0, index + 1) + ariaHiddenElement;
+                    index++;
+                    setTimeout(type,speed);
+                } else {
+                    setTimeout(erase,speed);
                 }
-                typeWriter(title, 0, () => {});
-            });
+            }
+
+            // Erase the title
+            function erase() {
+                if(index >= 0) {
+                    var temp = title.substring(0,index);
+                    document.getElementById("title").innerHTML = title.substring(0, index) + ariaHiddenElement;
+                    index--;
+                    setTimeout(erase,speed);
+                } else {
+                    updatePage();
+                    setTimeout(type,speed);
+                }
+            }
+
+            // Update the title and the background of the page, without repeating
+            function updatePage() {
+                // Set new title from the list of titles
+                var index = titles.indexOf(title);
+                if (index !== -1) {
+                    var subTitles = titles.slice();
+                    subTitles.splice(index, 1);
+                    title = choose(subTitles);
+                }
+
+                // Set new background from the list of backgrounds
+                var index = backgrounds.indexOf(bg);
+                if (index !== -1) {
+                    var subBg = backgrounds.slice();
+                    subBg.splice(index, 1);
+                    bg = choose(subBg);
+                    document.body.style.backgroundColor = bg;
+                }
+            }
         </script>
     </body>
 </html>
