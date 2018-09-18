@@ -42,7 +42,7 @@ h2 {
     background:#14b5d1;
     display:block;
     position:fixed;
-    bottom:-5em;
+   top:-5em;
     left:50%;
     margin-left:-175px;
     width:350px;
@@ -90,27 +90,27 @@ h2 {
 }
 
 @keyframes ach_in_anim {
-    0% { bottom:-5em; width:65px; margin-left:-32.5px; border-radius:50%; }
-    15% { bottom:2.2em; width:65px; margin-left:-32.5px; }
-    25% { bottom:1em; width:65px; margin-left:-32.5px;  }
-    75% { bottom:1em; width:65px; margin-left:-32.5px; }
-    85% { bottom:1em; width:65px; margin-left:-32.5px; border-radius:50%; }
-    92% { bottom:1em; width:380px; margin-left:-190px; border-radius:0; }
-    100% { bottom:1em; width:350px; margin-left:-175px; border-radius:0; }
+    0% {top:-5em; width:65px; margin-left:-32.5px; border-radius:50%; }
+    15% {top:2.2em; width:65px; margin-left:-32.5px; }
+    25% {top:1em; width:65px; margin-left:-32.5px;  }
+    75% {top:1em; width:65px; margin-left:-32.5px; }
+    85% {top:1em; width:65px; margin-left:-32.5px; border-radius:50%; }
+    92% {top:1em; width:380px; margin-left:-190px; border-radius:0; }
+    100% {top:1em; width:350px; margin-left:-175px; border-radius:0; }
 }
 
 @keyframes ach_current {
-    0% { bottom:1em; width:350px; margin-left:-175px; }
-    100% { bottom:1em; width:350px; margin-left:-175px; }
+    0% {top:1em; width:350px; margin-left:-175px; }
+    100% {top:1em; width:350px; margin-left:-175px; }
 }
 
 @keyframes ach_out_anim {
-    0% { bottom:1em; width:350px; margin-left:-175px;border-radius:50%; }
-    16% { bottom:1em; width:65px; margin-left:-32.5px; border-radius:50%;}
-    20% { bottom:1em; width:50px; margin-left:-25px; }
-    34% { bottom:1em; width:65px; margin-left:-32.5px; }
-    70% { bottom:1em; width:65px; margin-left:-32.5px; }
-    100% { bottom:-5em; width:65px; margin-left:-32.5px;border-radius:50%; }
+    0% {top:1em; width:350px; margin-left:-175px;border-radius:50%; }
+    16% {top:1em; width:65px; margin-left:-32.5px; border-radius:50%;}
+    20% {top:1em; width:50px; margin-left:-25px; }
+    34% {top:1em; width:65px; margin-left:-32.5px; }
+    70% {top:1em; width:65px; margin-left:-32.5px; }
+    100% {top:-5em; width:65px; margin-left:-32.5px;border-radius:50%; }
 }
 
 .achieved {
