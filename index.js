@@ -3,7 +3,7 @@ let choose = arr => arr[Math.floor(Math.random() * arr.length)];
 let subTitles = ASHKARA_TITLES.slice();
 let subBg = ASHKARA_BACKGROUNDS.slice();
 let ariaHiddenElement = '<span class="typewriter" aria-hidden="true"></span>';
-let badukCounter,firstBaduckAchiveKey,secondBaduckAchiveKey,thirdBaduckAchiveKey,fourthBaduckAchiveKey;
+let badukCounter,randomAchiveKey,firstBaduckAchiveKey,secondBaduckAchiveKey,thirdBaduckAchiveKey,fourthBaduckAchiveKey;
 let start = new Date();
 initCoockies();
 
@@ -108,6 +108,10 @@ function achive(achieveMainTitle) {
         document.getElementById("achiveTitle").innerHTML = fullTitle;
         document.getElementById("detail").innerText = "לחצת 1000 פעמיים על בדוק";
     }
+    if (achieveMainTitle === "פאקינג מזליסט") {
+        document.getElementById("achiveTitle").innerHTML = fullTitle;
+        document.getElementById("detail").innerText = "סיכוי של אחד לאלף כל חמש שניות";
+    }
     achieve();
 }
 
@@ -122,12 +126,24 @@ function achieve() {
 
 // Check if user got any new achievements
 function checkForAchives() {
-    spendedTimeOnPage();
+    spendedTimeAchiveCheck();
     baduckAchiveCheck();
+    randomChanceAchive();
+}
+
+// Check if user is lucky - 1 chance in 1000 every second of earning this achievement
+function randomChanceAchive() {
+    if (randomAchiveKey == 0) {
+        var randomValue = Math.floor((Math.random() * 1000) + 1);
+        if (randomValue == LUCKY_NUMBER_ACHIVE) {
+            randomAchiveKey = updateCookie("randomAchiveKey",1);
+            achive("פאקינג מזליסט");
+        }
+    }
 }
 
 // Check how much time user spend on the website
-function spendedTimeOnPage() {
+function spendedTimeAchiveCheck() {
     // Calculate the run time in seconds
     var runTime = (new Date() - start) / MILISEC_TO_SEC;
     if (runTime >= ONE_MIN_RUN_TIME && oneMinAchiveKey == 0) {
@@ -212,6 +228,7 @@ function updateCookie(cname,cvalue) {
 
 function initCoockies() {
     badukCounter = getCookie("baduckCounter") == "" ? 0 : Number(getCookie("baduckCounter"));
+    randomAchiveKey = getCookie("randomAchiveKey") == "" ? 0 : 1;
     firstBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
     secondBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
     thirdBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
