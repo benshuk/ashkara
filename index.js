@@ -1,17 +1,20 @@
 let index = 0;
-let choose = arr => arr[Math.floor(Math.random() * arr.length)];
 let subTitles = ASHKARA_TITLES.slice();
 let subBg = ASHKARA_BACKGROUNDS.slice();
 let ariaHiddenElement = '<span class="typewriter" aria-hidden="true"></span>';
-let badukCounter,randomAchiveKey,firstBaduckAchiveKey,secondBaduckAchiveKey,thirdBaduckAchiveKey,fourthBaduckAchiveKey;
+let badukCounter,randomAchieveKey,firstBaduckAchieveKey,secondBaduckAchieveKey,thirdBaduckAchieveKey,fourthBaduckAchieveKey;
 let start = new Date();
 initCoockies();
 
+// one liners
+let choose = arr => arr[Math.floor(Math.random() * arr.length)];
+let getElement = id => document.getElementById(id);
+
 // Achievement keys
-let oneMinAchiveKey = 0;
-let fiveMinAchiveKey = 0;
-let halfHourAchiveKey = 0;
-let satanMinAchiveKey = 0;
+let oneMinAchieveKey = 0;
+let fiveMinAchieveKey = 0;
+let halfHourAchieveKey = 0;
+let satanMinAchieveKey = 0;
 
 // Init background
 let bg = choose(subBg);
@@ -27,9 +30,9 @@ setBaudkListener();
 // Type the title
 function type() {
     if(index < title.length) {
-        var currentChar = title.charAt(index + 1);
-        var currentSpeed = (currentChar === " ") ? QUICKEST_SPEED : DEFAULT_SPEED;
-        document.getElementById("title").innerHTML = title.substring(0, index + 1) + ariaHiddenElement;
+        let currentChar = title.charAt(index + 1);
+        let currentSpeed = (currentChar === " ") ? QUICKEST_SPEED : DEFAULT_SPEED;
+        getElement("title").innerHTML = title.substring(0, index + 1) + ariaHiddenElement;
         index++;
         setTimeout(type, currentSpeed);
     } else {
@@ -40,14 +43,14 @@ function type() {
 // Erase the title
 function erase() {
     if(index >= 0) {
-        var currentChar = title.charAt(index);
-        var currentSpeed = (currentChar === " ") ? QUICKEST_SPEED : DEFAULT_SPEED;
-        document.getElementById("title").innerHTML = title.substring(0, index) + ariaHiddenElement;
+        let currentChar = title.charAt(index);
+        let currentSpeed = (currentChar === " ") ? QUICKEST_SPEED : DEFAULT_SPEED;
+        getElement("title").innerHTML = title.substring(0, index) + ariaHiddenElement;
         index--;
         setTimeout(erase, currentSpeed);
     } else {
         updatePage();
-        checkForAchives();
+        checkForAchievements();
         setTimeout(type, TYPE_TIMEOUT);
     }
 }
@@ -74,99 +77,57 @@ function updatePage() {
 /** ---------- Achievements Function ---------- **/
 
 //  Pop-up a new achievement
-function achive(achieveMainTitle) {
-    var fullTitle = "<strong>אשכרה הישג</strong>: " + achieveMainTitle;
-    if (achieveMainTitle === "אתה עדיין פה?") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "נשרפה לך דקה מהחיים על האתר הזה";
-    }
-    if (achieveMainTitle === "לך מפה צעיר") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "בזבזת יותר מחמש דקות על העמוד הזה";
-    }
-    if (achieveMainTitle === "משועמם רצח") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "הוצאת יותר מחצי שעה על העמוד הזה";
-    }
-    if (achieveMainTitle === "אתה השטן") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "שרפת יותר מ-666 דקות על העמוד הזה";
-    }
-    if (achieveMainTitle === "בדוק אתה משועמם") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "לחצת 10 פעמיים על בדוק";
-    }
-    if (achieveMainTitle === "בדוק אתה מובטל") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "לחצת 100 פעמיים על בדוק";
-    }
-    if (achieveMainTitle === "בדוק אין לך חיים") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "לחצת 500 פעמיים על בדוק";
-    }
-    if (achieveMainTitle === "מלך הבדוק") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "לחצת 1000 פעמיים על בדוק";
-    }
-    if (achieveMainTitle === "פאקינג מזליסט") {
-        document.getElementById("achiveTitle").innerHTML = fullTitle;
-        document.getElementById("detail").innerText = "סיכוי של אחד לאלף כל חמש שניות";
-    }
-    achieve();
-}
-
-// Update the class of the achievement pop-up
-function achieve() {
-    var element = document.getElementById("ach");
+function popAchievement(title, details) {
+    let element = getElement("ach");
+    getElement("achieveTitle").innerHTML = "<strong>אשכרה הישג</strong>: " + title;
+    getElement("detail").innerText = details;
     element.classList.remove("achieved");
-    setTimeout(function() {
-        element.classList.add("achieved");
-    }, 1)
+    setTimeout(() => element.classList.add("achieved"), 1);
 }
 
 // Check if user got any new achievements
-function checkForAchives() {
-    spendedTimeAchiveCheck();
-    baduckAchiveCheck();
-    randomChanceAchive();
+function checkForAchievements() {
+    spentTimeAchieveCheck();
+    baduckAchieveCheck();
+    randomChanceAchieve();
 }
 
 // Check if user is lucky - 1 chance in 1000 every second of earning this achievement
-function randomChanceAchive() {
-    if (randomAchiveKey == 0) {
-        var randomValue = Math.floor((Math.random() * 1000) + 1);
+function randomChanceAchieve() {
+    if (randomAchieveKey == 0) {
+        let randomValue = Math.floor((Math.random() * 1000) + 1);
         if (randomValue == LUCKY_NUMBER_ACHIVE) {
-            randomAchiveKey = updateCookie("randomAchiveKey",1);
-            achive("פאקינג מזליסט");
+            randomAchieveKey = updateCookie("randomAchieveKey",1);
+            popAchievement("פאקינג מזליסט", "הסיכוי לזכות בלוטו קטן יותר");
         }
     }
 }
 
 // Check how much time user spend on the website
-function spendedTimeAchiveCheck() {
+function spentTimeAchieveCheck() {
     // Calculate the run time in seconds
-    var runTime = (new Date() - start) / MILISEC_TO_SEC;
-    if (runTime >= ONE_MIN_RUN_TIME && oneMinAchiveKey == 0) {
-        oneMinAchiveKey = 1;
-        achive("אתה עדיין פה?");
-    } else if (runTime >= FIVE_MIN_RUN_TIME && fiveMinAchiveKey == 0) {
-        fiveMinAchiveKey = 1;
-        achive("לך מפה צעיר");
-    } else if (runTime >= THIRTY_MIN_RUN_TIME && halfHourAchiveKey == 0) {
-        halfHourAchiveKey = 1;
-        achive("משועמם רצח");
-    } else if (runTime >= SATAN_MIN_RUN_TIME && satanMinAchiveKey == 0) {
-        satanMinAchiveKey = 1;
-        achive("אתה השטן");
+    let runTime = (new Date() - start) / MILISEC_TO_SEC;
+    if (runTime >= ONE_MIN_RUN_TIME && oneMinAchieveKey == 0) {
+        oneMinAchieveKey = 1;
+        popAchievement("אתה עדיין פה?", "נשרפה לך דקה מהחיים על האתר הזה");
+    } else if (runTime >= FIVE_MIN_RUN_TIME && fiveMinAchieveKey == 0) {
+        fiveMinAchieveKey = 1;
+        popAchievement("לך מפה צעיר", "בזבזת יותר מחמש דקות על העמוד הזה");
+    } else if (runTime >= THIRTY_MIN_RUN_TIME && halfHourAchieveKey == 0) {
+        halfHourAchieveKey = 1;
+        popAchievement("משועמם רצח", "וואי וואי, העברת חצי שעה באתר הזה");
+    } else if (runTime >= SATAN_MIN_RUN_TIME && satanMinAchieveKey == 0) {
+        satanMinAchieveKey = 1;
+        popAchievement("אתה השטן", "שרפת יותר מ-666 דקות על העמוד הזה");
     }
 }
 
 // Set an event listener for Baduk counter
 function setBaudkListener() {
     if (title === "בדוק") {
-        document.getElementById("title").addEventListener("click", inceaseBaduckCounter);
+        getElement("title").addEventListener("click", inceaseBaduckCounter);
     } else {
-        document.getElementById("title").removeEventListener("click", inceaseBaduckCounter);
+        getElement("title").removeEventListener("click", inceaseBaduckCounter);
     }
 }
 
@@ -174,63 +135,60 @@ function setBaudkListener() {
 function inceaseBaduckCounter() {
     badukCounter++;
     updateCookie("baduckCounter", badukCounter);
-    document.getElementById("title").removeEventListener("click", inceaseBaduckCounter);
+    getElement("title").removeEventListener("click", inceaseBaduckCounter);
 }
 
 // Check how many Baduck strings were clicked
-function baduckAchiveCheck() {
-    if (badukCounter >= BADUCK_TEN_TIMES && firstBaduckAchiveKey == 0) {
-        firstBaduckAchiveKey = updateCookie("firstBaduckAchiveKey",1);
-        achive("בדוק אתה משועמם");
-    } else if (badukCounter >= BADUCK_ONE_HUNDRED_TIMES && secondBaduckAchiveKey == 0) {
-        secondBaduckAchiveKey = updateCookie("secondBaduckAchiveKey",1);
-        achive("בדוק אתה מובטל");
-    } else if (badukCounter >= BADUCK_ONE_HUNDRED_TIMES && thirdBaduckAchiveKey == 0) {
-        thirdBaduckAchiveKey = updateCookie("thirdBaduckAchiveKey",1);
-        achive("בדוק אין לך חיים");
-    } else if (badukCounter >= BADUCK_THOUSAND_TIMES && fourthBaduckAchiveKey == 0) {
-        fourthBaduckAchiveKey = updateCookie("fourthBaduckAchiveKey",1);
-        achive("מלך הבדוק");
+function baduckAchieveCheck() {
+    if (badukCounter >= BADUCK_TEN_TIMES && firstBaduckAchieveKey == 0) {
+        firstBaduckAchieveKey = updateCookie("firstBaduckAchieveKey",1);
+        popAchievement("בדוק אתה משועמם", "לחצת 10 פעמים על בדוק, שאפו");
+    } else if (badukCounter >= BADUCK_ONE_HUNDRED_TIMES && secondBaduckAchieveKey == 0) {
+        secondBaduckAchieveKey = updateCookie("secondBaduckAchieveKey",1);
+        popAchievement("בדוק אתה מובטל", "בדקת 100 פעמים כפרה עליך");
+    } else if (badukCounter >= BADUCK_FIVE_HUNDRED_TIMES && thirdBaduckAchieveKey == 0) {
+        thirdBaduckAchieveKey = updateCookie("thirdBaduckAchieveKey",1);
+        popAchievement("בדוק אין לך חיים", "נתת בבדוק לפחות 500 פעם");
+    } else if (badukCounter >= BADUCK_THOUSAND_TIMES && fourthBaduckAchieveKey == 0) {
+        fourthBaduckAchieveKey = updateCookie("fourthBaduckAchieveKey",1);
+        popAchievement("מלך הבדוק", "פירגנת אלף לחיצות, בדוק!");
     }
 }
 
 /** ---------- Coockies Function ---------- **/
 
-function setCookie(cname,cvalue,exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+function setCookie(cookieName, cookieVal, expiry) {
+    let d = new Date();
+    d.setTime(d.getTime() + (expiry * DAY));
+    let expires = "expires=" + d.toGMTString();
+    document.cookie = cookieName + "=" + cookieVal + ";" + expires + ";path=/";
 }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
+function getCookie(cookieName) {
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (var c of ca) {
+        let cookie = c.trim();
+        if (cookie.startsWith(name)) {
+            return c.substring(name.length, cookie.length);
         }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
+    };
     return "";
 }
 
-function updateCookie(cname,cvalue) {
-    var value = getCookie(cname);
-    if (value == "" || cvalue > Number(value)) {
-        setCookie(cname, cvalue, 365);
+function updateCookie(cookieName,cookieVal) {
+    let value = getCookie(cookieName);
+    if (value == "" || cookieVal > Number(value)) {
+        setCookie(cookieName, cookieVal, 365);
     }
 }
 
 function initCoockies() {
     badukCounter = getCookie("baduckCounter") == "" ? 0 : Number(getCookie("baduckCounter"));
-    randomAchiveKey = getCookie("randomAchiveKey") == "" ? 0 : 1;
-    firstBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
-    secondBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
-    thirdBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
-    fourthBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
+    randomAchieveKey = getCookie("randomAchieveKey") == "" ? 0 : 1;
+    firstBaduckAchieveKey = getCookie("firstBaduckAchieveKey") == "" ? 0 : 1;
+    secondBaduckAchieveKey = getCookie("firstBaduckAchieveKey") == "" ? 0 : 1;
+    thirdBaduckAchieveKey = getCookie("firstBaduckAchieveKey") == "" ? 0 : 1;
+    fourthBaduckAchieveKey = getCookie("firstBaduckAchieveKey") == "" ? 0 : 1;
 }

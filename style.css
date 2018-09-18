@@ -2,7 +2,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 body {
-    height: 100%;
     padding-top: 200px;
     user-select: none;
     transition: background .5s;
@@ -42,7 +41,7 @@ h2 {
     background:#14b5d1;
     display:block;
     position:fixed;
-   top:-5em;
+    top:-5em;
     left:50%;
     margin-left:-175px;
     width:350px;
@@ -68,7 +67,7 @@ h2 {
     overflow:hidden;
 }
 
-#ach #achiveTitle {
+#ach #achieveTitle {
     font-size:0.9em;
     width:260px;
     margin:0 0 -0.2em;
