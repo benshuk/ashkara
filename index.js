@@ -211,7 +211,7 @@ function updateCookie(cname,cvalue) {
 }
 
 function initCoockies() {
-    badukCounter = getCookie("baduckCounter") == "" ? getCookie("baduckCounter") : 0;
+    badukCounter = getCookie("baduckCounter") == "" ? 0 : Number(getCookie("baduckCounter"));
     firstBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
     secondBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
     thirdBaduckAchiveKey = getCookie("firstBaduckAchiveKey") == "" ? 0 : 1;
