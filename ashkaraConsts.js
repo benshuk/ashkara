@@ -7,3 +7,10 @@ const DEFAULT_SPEED = 125;
 const QUICKEST_SPEED = 0;
 const ERASE_TIMEOUT = 2000;
 const TYPE_TIMEOUT = 125;
+
+// Achievements
+const ONE_MIN_RUN_TIME = 1 * 60;
+const FIVE_MIN_RUN_TIME = 5 * 60;
+const THIRTY_MIN_RUN_TIME = 30 * 60;
+const SATAN_MIN_RUN_TIME = 666 * 60;
+const MILISEC_TO_SEC = 1000;
