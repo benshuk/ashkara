@@ -9,6 +9,7 @@ initCoockies();
 // one liners
 let choose = arr => arr[Math.floor(Math.random() * arr.length)];
 let getElement = id => document.getElementById(id);
+let createElement = type => document.createElement(type);
 
 // Achievement keys
 let oneMinAchieveKey = 0;
@@ -75,6 +76,7 @@ function updatePage() {
 }
 
 /** ---------- Achievements Function ---------- **/
+// TODO: separate to a different js file.
 
 //  Pop-up a new achievement
 function popAchievement(title, details) {
@@ -155,6 +157,19 @@ function baduckAchieveCheck() {
     }
 }
 
+// TODO: call this function everytime a new acheievement is accomplished.
+// TODO: style the list with css :)
+function updateAchievementsList(ach) {
+    let aList = getElement("achievements-list");
+    let acheievementLi = createElement('li');
+
+    if (getElement("nope") !== null) getElement("nope").remove();
+
+    acheievementLi.innerText = ach.name;
+
+    aList.appendChild(acheievementLi);
+}
+
 /** ---------- Coockies Function ---------- **/
 
 function setCookie(cookieName, cookieVal, expiry) {
@@ -177,7 +192,7 @@ function getCookie(cookieName) {
     return "";
 }
 
-function updateCookie(cookieName,cookieVal) {
+function updateCookie(cookieName, cookieVal) {
     let value = getCookie(cookieName);
     if (value == "" || cookieVal > Number(value)) {
         setCookie(cookieName, cookieVal, 365);
