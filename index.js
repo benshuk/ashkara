@@ -1,7 +1,7 @@
 // Calculate start time
 let start = new Date();
 
-// Initialize instance achievements 
+// Initialize instance achievements
 // Initialize Baduck achievements
 let achFirstBaduk  = new Achievements(achFirstBadukName,achFirstBadukSubName);
 let achSecondBaduk = new Achievements(achSecondBadukName,achSecondBadukSubName);
@@ -128,11 +128,11 @@ function spentTimeAchieveCheck() {
     if (runTime >= ONE_MIN_RUN_TIME && achFirstSpendTime.status) {
         achFirstSpendTime.popAchievement();
     } else if (runTime >= FIVE_MIN_RUN_TIME && achSecondSpendTime.status) {
-		achSecondSpendTime.popAchievement();
+        achSecondSpendTime.popAchievement();
     } else if (runTime >= THIRTY_MIN_RUN_TIME && achThirdSpendTime.status) {
-		achThirdSpendTime.popAchievement();
+        achThirdSpendTime.popAchievement();
     } else if (runTime >= SATAN_MIN_RUN_TIME && achFourthSpendTime.status) {
-		achFourthSpendTime.popAchievement();
+        achFourthSpendTime.popAchievement();
     }
 }
 
@@ -159,9 +159,9 @@ function baduckAchieveCheck() {
     } else if (badukCounter >= BADUCK_ONE_HUNDRED_TIMES && achSecondBaduk.status) {
         achSecondBaduk.popAchievement();
     } else if (badukCounter >= BADUCK_FIVE_HUNDRED_TIMES && achThirdBaduk.status) {
-		achThirdBaduk.popAchievement();
+        achThirdBaduk.popAchievement();
     } else if (badukCounter >= BADUCK_THOUSAND_TIMES && achFourthBaduk.status) {
-		achFourthBaduk.popAchievement();
+        achFourthBaduk.popAchievement();
     }
 }
 
