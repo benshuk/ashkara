@@ -1,2 +1,4 @@
 # ASHKARA
-![](image/overview.gif)
+<p align="center">
+  <img src ="image/overview.gif" />
+</p>
