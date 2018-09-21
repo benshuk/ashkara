@@ -140,8 +140,9 @@ function uniqueAchieveCheck() {
 function spentTimeAchieveCheck() {
     // Calculate the run time in seconds
     let runTime = (new Date() - start) / MILISEC_TO_SEC;
-    let totalTime = runTime + timeSpent;
 
+    let totalTime = runTime + timeSpent;
+	console.log(totalTime);
     if (totalTime >= ONE_MIN_RUN_TIME && achFirstSpendTime.status) {
         achFirstSpendTime.popAchievement();
     } else if (totalTime >= FIVE_MIN_RUN_TIME && achSecondSpendTime.status) {
@@ -252,8 +253,8 @@ function updateCookie(cookieName, cookieVal) {
 
 function initCookies() {
     // Get the number of Baduk clicks
-    badukCounter = getCookie(BADUCK_COUNTER_COOKIE_NAME) == "" ? 0 : Number(getCookie(BADUCK_COUNTER_COOKIE_NAME));
-    timeSpent = parseInt(getCookie(TIME_SPENT_COOKIE_NAME));
+    badukCounter = getCookie(BADUCK_COUNTER_COOKIE_NAME) == "" ? 0 : parseInt(getCookie(BADUCK_COUNTER_COOKIE_NAME));
+    timeSpent = getCookie(TIME_SPENT_COOKIE_NAME) == "" ? 0 : parseInt(getCookie(TIME_SPENT_COOKIE_NAME));
 
     // Set cookie eater key to be 1
     updateCookie(COOKIE_EATER_COOKIE_NAME, 1);
