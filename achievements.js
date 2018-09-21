@@ -1,8 +1,10 @@
 class Achievements {
-    constructor(name,subname) {
-        this.name = name;
-        this.subname = subname;
-        this.status = getCookie(name) == "" ? 1 : 0;
+    constructor(cookie) {
+        var info = getInfoOfAchCookie(cookie);
+        this.name = info.name;
+        this.subname = info.subname;
+        this.cookie = cookie;
+        this.status = getCookie(cookie) == "" ? 1 : 0;
     }
 
     setStatus(status) {

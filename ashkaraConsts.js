@@ -16,38 +16,88 @@ const FIVE_MIN_RUN_TIME = 5 * 60;
 const THIRTY_MIN_RUN_TIME = 30 * 60;
 const SATAN_MIN_RUN_TIME = 666 * 60;
 const MILISEC_TO_SEC = 1000;
-const BADUCK_TEN_TIMES = 10;
-const BADUCK_ONE_HUNDRED_TIMES = 100;
-const BADUCK_FIVE_HUNDRED_TIMES = 500;
-const BADUCK_THOUSAND_TIMES = 1000;
+const BADUK_TEN_TIMES = 10;
+const BADUK_ONE_HUNDRED_TIMES = 100;
+const BADUK_FIVE_HUNDRED_TIMES = 500;
+const BADUK_THOUSAND_TIMES = 1000;
 const LUCKY_NUMBER_ACHIVE = 555;
 const LUCKY_NUMBER_RANGE = 1000;
+
+/** ---------- ALL Cookies Names ---------- **/
+
+const BADUCK_COUNTER_COOKIE_NAME = "badukCounter";
+const COOKIE_EATER_COOKIE_NAME = "cookieEaterKey";
 
 /** ---------- All Achievements ---------- **/
 
 /** ---------- Baduk Achievements ---------- **/
 
-const achFirstBadukName = "בדוק אתה משועמם";
-const achFirstBadukSubName = "לחצת 10 פעמים על בדוק, שאפו";
-const achSecondBadukName = "בדוק אתה מובטל";
-const achSecondBadukSubName = "בדקת 100 פעמים כפרה עלייך";
-const achThirdBadukName = "בדוק אין לך חיים";
-const achThirdBadukSubName =  "נתת בבדוק לפחות 500 פעם";
-const achFourthBadukName = "מלך הבדוק";
-const achFourthBadukSubName = "פירגנת אלף לחיצות, בדוק!"
+const ACH_FIRST_BADUK_NAME = "בדוק אתה משועמם";
+const ACH_FIRST_BADUK_SUB_NAME = "לחצת 10 פעמים על בדוק, שאפו";
+const ACH_FIRST_BADUK_COOKIE = "firstBadukAch";
+
+const ACH_SECOND_BADUK_NAME = "בדוק אתה מובטל";
+const ACH_SECOND_BADUK_SUB_NAME = "בדקת 100 פעמים כפרה עלייך";
+const ACH_SECOND_BADUK_COOKIE = "secondBadukAch";
+
+const ACH_THIRD_BADUK_NAME = "בדוק אין לך חיים";
+const ACH_THIRD_BADUK_SUB_NAME =  "נתת בבדוק לפחות 500 פעם";
+const ACH_THIRD_BADUK_COOKIE = "thirdBadukAch";
+
+const ACH_FOURTH_BADUK_NAME = "מלך הבדוק";
+const ACH_FOURTH_BADUK_SUB_NAME = "פירגנת אלף לחיצות, בדוק!"
+const ACH_FOURTH_BADUK_COOKIE = "fourthBadukAch";
 
 /** ---------- Spend Time Achievements ---------- **/
 
-const achFirstSpendTimeName = "אתה עדיין פה?";
-const achFirstSpendTimeSubName = "נשרפה לך דקה מהחיים על האתר הזה";
-const achSecondSpendTimeName = "לך מפה צעיר";
-const achSecondSpendTimeSubName = "בזבזת יותר מחמש דקות על העמוד הזה";
-const achThirdSpendTimeName = "משועמם רצח";
-const achThirdSpendTimeSubName = "וואי וואי, העברת חצי שעה באתר הזה";
-const achFourthSpendTimeName = "אתה השטן";
-const achFourthSpendTimeSubName = "שרפת 666 דקות על העמוד הזה";
+const ACH_FIRST_SPEND_TIME_NAME = "אתה עדיין פה?";
+const ACH_FIRST_SPEND_TIME_SUB_NAME = "נשרפה לך דקה מהחיים על האתר הזה";
+const ACH_FIRST_SPEND_TIME_COOKIE = "firstSpendTimeAch";
+
+const ACH_SECOND_SPEND_TIME_NAME = "לך מפה צעיר";
+const ACH_SECOND_SPEND_TIME_SUB_NAME = "בזבזת יותר מחמש דקות על העמוד הזה";
+const ACH_SECOND_SPEND_TIME_COOKIE = "secondSpendTimeAch";
+const ACH_THIRD_SPEND_TIME_NAME = "משועמם רצח";
+
+const ACH_THIRD_SPEND_TIME_SUB_NAME = "וואי וואי, העברת חצי שעה באתר הזה";
+const ACH_THIRD_SPEND_TIME_COOKIE = "thirdSpendTimeAch";
+
+const ACH_FOURTH_SPEND_TIME_NAME = "אתה השטן";
+const ACH_FOURTH_SPEND_TIME_SUB_NAME = "שרפת 666 דקות על העמוד הזה";
+const ACH_FOURTH_SPEND_TIME_COOKIE = "fourthSpendTimeAch";
 
 /** ---------- Unique Achievements ---------- **/
 
-const achLuckyName = "פאקינג מזליסט";
-const achLuckySubName = "הסיכוי לזכות בלוטו קטן יותר";
+const ACH_LUCKY_NAME = "פאקינג מזליסט";
+const ACH_LUCKY_SUB_NAME = "הסיכוי לזכות בלוטו קטן יותר";
+const ACH_LUCKY_COOKIE = "luckyAch";
+
+const ACH_COOKIE_EATER_NAME = "מפלצת העוגיות";
+const ACH_COOKIE_EATER_SUB_NAME = "איך אתה מעז לאכול את העוגיות שלנו";
+const ACH_COOKIE_EATER_COOKIE = "cookieEaterAch";
+
+/** ---------- Functions ---------- **/
+
+function getInfoOfAchCookie(name) {
+    if (name === ACH_FIRST_BADUK_COOKIE) {                                                    // Baduk Achievements
+        return { name: ACH_FIRST_BADUK_NAME, subname: ACH_FIRST_BADUK_SUB_NAME};
+    } else if (name === ACH_SECOND_BADUK_COOKIE) {
+        return { name: ACH_SECOND_BADUK_NAME, subname: ACH_SECOND_BADUK_SUB_NAME};
+    } else if (name === ACH_THIRD_BADUK_COOKIE) {
+        return { name: ACH_THIRD_BADUK_NAME, subname: ACH_THIRD_BADUK_SUB_NAME};
+    } else if (name === ACH_FOURTH_BADUK_COOKIE) {
+        return { name: ACH_FOURTH_BADUK_NAME, subname: ACH_FOURTH_BADUK_SUB_NAME};
+    } else if (name === ACH_FIRST_SPEND_TIME_COOKIE) {
+        return { name: ACH_FIRST_SPEND_TIME_NAME, subname: ACH_FIRST_SPEND_TIME_SUB_NAME};    // Spend Time Achievements
+    } else if (name === ACH_SECOND_SPEND_TIME_COOKIE) {
+        return { name: ACH_SECOND_SPEND_TIME_NAME, subname: ACH_SECOND_SPEND_TIME_SUB_NAME};
+    } else if (name === ACH_THIRD_SPEND_TIME_COOKIE) {
+        return { name: ACH_THIRD_SPEND_TIME_NAME, subname: ACH_THIRD_SPEND_TIME_SUB_NAME};
+    } else if (name === ACH_FOURTH_SPEND_TIME_COOKIE) {
+        return { name: ACH_FOURTH_SPEND_TIME_NAME, subname: ACH_FOURTH_SPEND_TIME_SUB_NAME};
+    } else if (name === ACH_LUCKY_COOKIE) {                                                   // Unique Achievements
+        return { name: ACH_LUCKY_NAME, subname: ACH_LUCKY_SUB_NAME};
+    } else if (name === ACH_COOKIE_EATER_COOKIE) {
+        return { name: ACH_COOKIE_EATER_NAME, subname: ACH_COOKIE_EATER_SUB_NAME};
+    }
+}
