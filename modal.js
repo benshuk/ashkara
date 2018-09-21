@@ -4,6 +4,7 @@ document.addEventListener('click', function (e) {
 
     if (target.hasAttribute('data-toggle') && target.getAttribute('data-toggle') == 'modal') {
         if (target.hasAttribute('data-target')) {
+            updateAchievementsList();
             var m_ID = target.getAttribute('data-target');
             document.getElementById(m_ID).classList.add('open');
             e.preventDefault();
@@ -15,5 +16,6 @@ document.addEventListener('click', function (e) {
         var modal = document.querySelector('[class="modal open"]');
         modal.classList.remove('open');
         e.preventDefault();
+        removeAchievements();
     }
 }, false);

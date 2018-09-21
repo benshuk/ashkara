@@ -1,6 +1,7 @@
 // Calculate start time
 let start = new Date();
 
+let achievements = [];
 // Initialize instance achievements
 // Initialize Baduk achievements
 let achFirstBaduk  = new Achievements(ACH_FIRST_BADUK_COOKIE);
@@ -23,6 +24,7 @@ let subTitles = ASHKARA_TITLES.slice();
 let subBg = ASHKARA_BACKGROUNDS.slice();
 let ariaHiddenElement = '<span class="typewriter" aria-hidden="true"></span>';
 let badukCounter;
+let timeSpent;
 
 // Initialize needed cookies
 initCookies();
@@ -35,6 +37,17 @@ let createElement = type => document.createElement(type);
 // Initialize background
 let bg = choose(subBg);
 document.body.style.backgroundColor = bg;
+
+window.addEventListener('beforeunload', function (e) {
+    e.preventDefault();
+
+    let timeCurrentlySpent = parseInt((new Date() - start) / MILISEC_TO_SEC);
+
+    if (Number.isInteger(timeSpent))
+        timeCurrentlySpent += timeSpent;
+
+    updateCookie("timeSpent", timeCurrentlySpent);
+});
 
 // Initialize title
 let title = choose(subTitles);
@@ -127,13 +140,15 @@ function uniqueAchieveCheck() {
 function spentTimeAchieveCheck() {
     // Calculate the run time in seconds
     let runTime = (new Date() - start) / MILISEC_TO_SEC;
-    if (runTime >= ONE_MIN_RUN_TIME && achFirstSpendTime.status) {
+    let totalTime = runTime + timeSpent;
+
+    if (totalTime >= ONE_MIN_RUN_TIME && achFirstSpendTime.status) {
         achFirstSpendTime.popAchievement();
-    } else if (runTime >= FIVE_MIN_RUN_TIME && achSecondSpendTime.status) {
+    } else if (totalTime >= FIVE_MIN_RUN_TIME && achSecondSpendTime.status) {
         achSecondSpendTime.popAchievement();
-    } else if (runTime >= THIRTY_MIN_RUN_TIME && achThirdSpendTime.status) {
+    } else if (totalTime >= THIRTY_MIN_RUN_TIME && achThirdSpendTime.status) {
         achThirdSpendTime.popAchievement();
-    } else if (runTime >= SATAN_MIN_RUN_TIME && achFourthSpendTime.status) {
+    } else if (totalTime >= SATAN_MIN_RUN_TIME && achFourthSpendTime.status) {
         achFourthSpendTime.popAchievement();
     }
 }
@@ -169,51 +184,77 @@ function badukAchieveCheck() {
 
 // TODO: call this function every time a new achievement is accomplished.
 // TODO: style the list with css
-function updateAchievementsList(ach) {
+function updateAchievementsList() {
     let aList = getElement("achievements-list");
-    let acheievementLi = createElement('li');
+    let subtitle = getElement("modal-subtitle");
+    let amount = 0;
+    let total = VISIBLE_AHCIEVEMENTS_COOKIES.length;
+    let i = createElement('i');
 
-    if (getElement("nope") !== null) getElement("nope").remove();
+    VISIBLE_AHCIEVEMENTS_COOKIES.forEach(cookieName => {
+        let info = getInfoOfAchCookie(cookieName);
+        let acheievementLi = createElement('li');
 
-    acheievementLi.innerText = ach;
+        if (getCookie(cookieName)) {
+            acheievementLi.innerHTML  = "<b>" + info.name + "</b>";
+            acheievementLi.innerHTML += " - " + info.subname;
+            aList.appendChild(acheievementLi);
+            amount += 1;
+        }
+    });
 
-    aList.appendChild(acheievementLi);
+    if (amount > 0 && amount < total) {
+        i.innerText = "חשפת " + amount +
+                      " מתוך " + total + 
+                      " הישגים!"
+        subtitle.innerHTML = "";
+        subtitle.appendChild(i);
+    } else if (amount == total){
+        i.innerText = "אשכרה השגת הכל בחיים. אתה יכול ללכת לישון עכשיו.";
+        subtitle.innerHTML = "";
+        subtitle.appendChild(i);
+    }
+}
+
+function removeAchievements() {
+    let aList = getElement("achievements-list");
+    aList.innerHTML = '';
 }
 
 /** ---------- Cookie Functions ---------- **/
 
 function setCookie(cookieName,cookieValue,cookieDays) {
+    let expires_date = "";
     if (cookieDays) {
-        var date = new Date();
+        let date = new Date();
         date.setTime(date.getTime() + (cookieDays * DAY));
-        var expires_date = "; expires=" + date.toGMTString();
+        expires_date += "; expires=" + date.toGMTString();
     }
-    else var expires_date = "";
     document.cookie = cookieName + "=" + cookieValue + expires_date + "; path=/";
 }
 
 function getCookie(cookieName) {
-    var nameEQ = cookieName + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)== ' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
+    let nameEQ = cookieName + "=";
+    let cookiesArray = document.cookie.split(';').map( c => c.trim() );
+
+    for (let cookie of cookiesArray)
+        if (cookie.startsWith(nameEQ))
+            return cookie.substring(nameEQ.length, cookie.length);
+
     return "";
 }
 
 function updateCookie(cookieName, cookieVal) {
     let value = getCookie(cookieName);
-    if (value == "" || cookieVal > Number(value)) {
+    if (value == "" || cookieVal > Number(value))
         setCookie(cookieName, cookieVal, YEAR_IN_DAYS);
-    }
 }
 
 function initCookies() {
     // Get the number of Baduk clicks
     badukCounter = getCookie(BADUCK_COUNTER_COOKIE_NAME) == "" ? 0 : Number(getCookie(BADUCK_COUNTER_COOKIE_NAME));
+    timeSpent = parseInt(getCookie(TIME_SPENT_COOKIE_NAME));
 
     // Set cookie eater key to be 1
-    updateCookie(COOKIE_EATER_COOKIE_NAME,1);
+    updateCookie(COOKIE_EATER_COOKIE_NAME, 1);
 }

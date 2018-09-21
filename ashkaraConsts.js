@@ -27,6 +27,7 @@ const LUCKY_NUMBER_RANGE = 1000;
 
 const BADUCK_COUNTER_COOKIE_NAME = "badukCounter";
 const COOKIE_EATER_COOKIE_NAME = "cookieEaterKey";
+const TIME_SPENT_COOKIE_NAME = "timeSpent";
 
 /** ---------- All Achievements ---------- **/
 
@@ -57,8 +58,8 @@ const ACH_FIRST_SPEND_TIME_COOKIE = "firstSpendTimeAch";
 const ACH_SECOND_SPEND_TIME_NAME = "לך מפה צעיר";
 const ACH_SECOND_SPEND_TIME_SUB_NAME = "בזבזת יותר מחמש דקות על העמוד הזה";
 const ACH_SECOND_SPEND_TIME_COOKIE = "secondSpendTimeAch";
-const ACH_THIRD_SPEND_TIME_NAME = "משועמם רצח";
 
+const ACH_THIRD_SPEND_TIME_NAME = "משועמם רצח";
 const ACH_THIRD_SPEND_TIME_SUB_NAME = "וואי וואי, העברת חצי שעה באתר הזה";
 const ACH_THIRD_SPEND_TIME_COOKIE = "thirdSpendTimeAch";
 
@@ -75,6 +76,19 @@ const ACH_LUCKY_COOKIE = "luckyAch";
 const ACH_COOKIE_EATER_NAME = "מפלצת העוגיות";
 const ACH_COOKIE_EATER_SUB_NAME = "איך אתה מעז לאכול את העוגיות שלנו";
 const ACH_COOKIE_EATER_COOKIE = "cookieEaterAch";
+
+const VISIBLE_AHCIEVEMENTS_COOKIES = [
+    ACH_FIRST_BADUK_COOKIE,
+    ACH_SECOND_BADUK_COOKIE,
+    ACH_THIRD_BADUK_COOKIE,
+    ACH_FOURTH_BADUK_COOKIE,
+    ACH_FIRST_SPEND_TIME_COOKIE,
+    ACH_SECOND_SPEND_TIME_COOKIE,
+    ACH_THIRD_SPEND_TIME_COOKIE,
+    ACH_FOURTH_SPEND_TIME_COOKIE,
+    ACH_LUCKY_COOKIE,
+    ACH_COOKIE_EATER_COOKIE
+];
 
 /** ---------- Functions ---------- **/
 

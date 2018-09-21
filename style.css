@@ -51,6 +51,10 @@ h2 {
     padding:0 1.2em 0 0;
 }
 
+.center {
+    text-align: center;
+}
+
 #ach .icon {
     float:left;
     font-size:3em;
@@ -72,6 +76,15 @@ h2 {
     width:260px;
     margin:0 0 -0.2em;
     padding:0;
+}
+
+#achievements-list {
+    text-align: right;
+    list-style: none;
+}
+
+#achievements-list li {
+    padding-bottom: 10px;
 }
 
 #ach #detail {
@@ -170,6 +183,10 @@ h2 {
     width:100%;
     text-align:center;
     margin:1.5em 0;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .button {

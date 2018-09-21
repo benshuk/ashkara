@@ -9,10 +9,13 @@ class Achievements {
 
     setStatus(status) {
         this.status = status;
-        updateCookie(this.name,status);
+        updateCookie(this.cookie, status);
     }
 
     popAchievement() {
+        if (getCookie(this.cookie))
+            return;
+
         this.setStatus(0);
         let element = getElement("ach");
         getElement("achieveTitle").innerHTML = "<strong>אשכרה הישג</strong>: " + this.name;

@@ -14,10 +14,22 @@
 .modal-window {
     position: relative;
     background-color: #FFFFFF;
-    color:rgb(17, 75, 95);
+    border-radius: 15px;
+    color:#114b5f;
     width: 50%;
     margin: 10% auto;
     padding: 20px;
+    text-align: right;
+}
+
+.modal-window a {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: black;
+}
+
+.modal-window .title {
+    margin: 0;
 }
 
 .modal-window.small {
