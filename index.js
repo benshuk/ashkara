@@ -142,7 +142,6 @@ function spentTimeAchieveCheck() {
     let runTime = (new Date() - start) / MILISEC_TO_SEC;
 
     let totalTime = runTime + timeSpent;
-	console.log(totalTime);
     if (totalTime >= ONE_MIN_RUN_TIME && achFirstSpendTime.status) {
         achFirstSpendTime.popAchievement();
     } else if (totalTime >= FIVE_MIN_RUN_TIME && achSecondSpendTime.status) {
