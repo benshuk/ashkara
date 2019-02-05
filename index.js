@@ -25,6 +25,7 @@ let subBg = ASHKARA_BACKGROUNDS.slice();
 let ariaHiddenElement = '<span class="typewriter" aria-hidden="true"></span>';
 let badukCounter;
 let timeSpent;
+let ashkaraCounter = 0;
 
 // Initialize needed cookies
 initCookies();
@@ -80,6 +81,7 @@ function erase() {
     } else {
         updatePage();
         checkForAchievements();
+        ashkaraEveryHalfMin();
         setTimeout(type, TYPE_TIMEOUT);
     }
 }
@@ -257,4 +259,19 @@ function initCookies() {
 
     // Set cookie eater key to be 1
     updateCookie(COOKIE_EATER_COOKIE_NAME, 1);
+}
+
+// Plays "Ashkara" sound
+function playAshkaraSound() {
+	  var sound = document.getElementById("AshkaraAudio");
+	  sound.play()
+}
+
+function ashkaraEveryHalfMin() {
+console.log(ashkaraCounter);
+	if (ashkaraCounter == 5) {
+		playAshkaraSound();
+		ashkaraCounter = 0;
+	}
+	ashkaraCounter++;
 }
