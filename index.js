@@ -268,7 +268,6 @@ function playAshkaraSound() {
 }
 
 function ashkaraEveryHalfMin() {
-console.log(ashkaraCounter);
 	if (ashkaraCounter == 5) {
 		playAshkaraSound();
 		ashkaraCounter = 0;
