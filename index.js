@@ -264,7 +264,7 @@ function initCookies() {
 // Plays "Ashkara" sound
 function playAshkaraSound() {
 	  var sound = document.getElementById("AshkaraAudio");
-	  sound.play()
+	  sound.play();
 }
 
 function ashkaraEveryHalfMin() {
